@@ -1,0 +1,28 @@
+{
+  "name": "original-content",
+  "version": "1.0.0",
+  "description": "Leave comments on scraped news articles",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaeledwards91/original-content.git"
+  },
+  "author": "Michael Edwards",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaeledwards91/original-content/issues"
+  },
+  "homepage": "https://github.com/michaeledwards91/original-content#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cheerio": "^0.22.0",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.7.6",
+    "request": "^2.79.0"
+  }
+}
