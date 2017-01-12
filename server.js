@@ -5,7 +5,7 @@ var exphbs = require("express-handlebars");
 var bodyParser = require("body-parser");
 
 // Requiring models
-var Comment = require("./models/Comment.js");
+var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
 // Scrapin stuff
