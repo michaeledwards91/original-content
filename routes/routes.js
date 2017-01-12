@@ -2,6 +2,8 @@
 var Article = require("../models/Article");
 var Note = require("../models/Note");
 
+var mongoose = require("mongoose");
+
 //Scrape Tools
 var request = require("request");
 var cheerio = require("cheerio");
@@ -63,21 +65,24 @@ module.exports = function (app) {
 	});
 
 	//Route to display saved articles
-	app.get("/saved", function(req, res) {
+	app.get("/api/saved", function(req, res) {
 		//Page to display saved articles
 
 		Article.find({saved: true}, function(err, data) {
 			if (err) throw err;
 
-			console.log(data);
+			res.json(data);
 		});
 
 	});
 
 	//Route to save articles
-	app.put("/savearticle/:id", function(req, res) {
-		//FIX THIS ROUTE
-		Article.findOneAndUpdate({_id: req.params.id}, { $set: {saved: true} }, function(err, doc) {
+	app.get("/savearticle/:id", function(req, res) {
+		
+		var articleId = mongoose.Types.ObjectId(req.params.id);
+		console.log(articleId);
+
+		Article.findOneAndUpdate({_id: articleId}, { $set: {saved: true} }, function(err, doc) {
 
 			if (err) throw err;
 
