@@ -62,4 +62,9 @@ module.exports = function (app) {
 
 	});
 
+	app.get("/saved", function(req, res) {
+		//Page to display saved articles
+		console.log("Nothing here yet");
+	});
+
 }
