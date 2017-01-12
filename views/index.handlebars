@@ -1,10 +1,13 @@
 <div class="container">
 	<div class="row">
-		<a class="waves-effect waves-light btn-large" id="scraper">Scrape!</a>
+		<a class="waves-effect waves-light btn-large" id="scraper" href="/scrape">Scrape!</a>
 		<ul class="collection">
 		{{#each articles}}
 
-		    <li class="collection-item"><a href="{{this.link}}">{{this.title}}</a></li>
+		    <li class="collection-item">
+		    <a href="{{this.link}}">{{this.title}}</a>
+		    <button class="waves-effect waves-light btn saveBtn" id="{{this._id}}">Save Article</button>
+		    </li>
 
 		{{/each}}
 		</ul>

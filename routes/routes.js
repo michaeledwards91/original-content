@@ -48,7 +48,7 @@ module.exports = function (app) {
 
 		    });
 
-	});
+		});
 
 	}); //End of scrape route
 
@@ -62,9 +62,28 @@ module.exports = function (app) {
 
 	});
 
+	//Route to display saved articles
 	app.get("/saved", function(req, res) {
 		//Page to display saved articles
-		console.log("Nothing here yet");
+
+		Article.find({saved: true}, function(err, data) {
+			if (err) throw err;
+
+			console.log(data);
+		});
+
+	});
+
+	//Route to save articles
+	app.put("/savearticle/:id", function(req, res) {
+		//FIX THIS ROUTE
+		Article.findOneAndUpdate({_id: req.params.id}, { $set: {saved: true} }, function(err, doc) {
+
+			if (err) throw err;
+
+			res.send(doc);
+		});
+
 	});
 
 }
