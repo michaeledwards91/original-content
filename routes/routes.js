@@ -20,6 +20,16 @@ module.exports = function (app) {
 		
 	});
 
+	app.get("/saved", function(req, res) {
+
+		Article.find({saved: true}, function(err, data) {
+			if (err) throw err;
+
+			res.render("saved", {articles: data});
+		});
+
+	});
+
 	//Route that scrapes
 	app.get("/scrape", function(req, res) {
 		//Scrape articles with cheerio
@@ -64,6 +74,17 @@ module.exports = function (app) {
 
 	});
 
+	app.get("/api/articles/:id", function(req, res) {
+
+		var articleId = mongoose.Types.ObjectId(req.params.id);
+		console.log(articleId);
+
+		Article.findOne({_id: articleId}, function(err, doc) {
+			res.json(doc);
+		});	
+
+	});
+
 	//Route to display saved articles
 	app.get("/api/saved", function(req, res) {
 		//Page to display saved articles
@@ -86,7 +107,21 @@ module.exports = function (app) {
 
 			if (err) throw err;
 
-			res.send(doc);
+			console.log(doc);
+		});
+
+	});
+
+	app.get("/unsavearticle/:id", function(req, res) {
+
+		var articleId = mongoose.Types.ObjectId(req.params.id);
+		console.log(articleId);
+
+		Article.findOneAndUpdate({_id: articleId}, { $set: {saved: false} }, function(err, doc) {
+
+			if (err) throw err;
+
+			res.redirect("/saved");
 		});
 
 	});

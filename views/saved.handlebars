@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+		<ul class="collection">
+		{{#each articles}}
+
+		    <li class="collection-item">
+		    <a href="{{this.link}}">{{this.title}}</a>
+		    <a class="waves-effect waves-light btn notesBtn" data-id="{{this.id}}" href="#notesModal">Article Notes</a>
+		    <a class="waves-effect waves-light btn unsaveBtn" href="/unsavearticle/{{this.id}}">Unsave Article</a>
+		    </li>
+
+		{{/each}}
+		</ul>
+
+		{{!-- Notes Modal --}}
+		<div id="notesModal" class="modal">
+		    <div class="modal-content">
+		    	<h4 id="modalHead">Modal Header</h4>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+		    </div>
+	  	</div>
+	</div>
+</div>
