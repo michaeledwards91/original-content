@@ -51,14 +51,19 @@ module.exports = function (app) {
 		    result.link = $(element).children().attr("href");
 		    result.title = $(element).children().text();
 
-		    var entry = new Article(result);
+		    // var entry = new Article(result);
 
-		    entry.save(function(err, doc) {
+		    // entry.save(function(err, doc) {
+		    // 	if (err) throw err;
+		    // 	console.log(doc);
+		    // });
+
+		    Article.findOneAndUpdate(result, result, {upsert: true}, function(err, doc) {
 		    	if (err) throw err;
 		    	console.log(doc);
 		    });
 
-		    });
+		  });
 
 		});
 
@@ -82,6 +87,49 @@ module.exports = function (app) {
 		Article.findOne({_id: articleId}, function(err, doc) {
 			res.json(doc);
 		});	
+
+	});
+
+	//58783921ef834c64efcbd211
+
+	app.get("/api/populatedarticle/:id", function(req, res) {
+
+		var articleId = mongoose.Types.ObjectId(req.params.id);
+		console.log(articleId);
+
+		Article.findOne({_id: articleId})
+		.populate("notes")
+		.exec(function (err, doc) {
+			if (err) handleError(err);
+			res.json(doc);
+		});
+
+	});
+
+	app.post("/api/articles/:id", function(req, res) {
+		console.log(req.body);
+		var noteInput = req.body.note;
+
+		var articleId = mongoose.Types.ObjectId(req.params.id);
+		console.log(articleId);
+
+		var newNote = new Note({body: noteInput});
+		newNote.save(function(err, doc) {
+			if (err) throw err;
+
+			Article.findOneAndUpdate({_id: articleId}, { $push: {notes: doc._id} }, function(err, articleDoc) {
+				if (err) throw err;
+				res.send(articleDoc);
+			});
+		});
+
+		// Article.findOneAndUpdate({_id: articleId}, { $push: {notes: noteInput} }, function(err, doc) {
+		// 	if (err) {
+		// 		console.log(err);
+		// 	} else {
+		// 		res.send(doc);
+		// 	}
+		// });
 
 	});
 

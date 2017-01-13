@@ -12,6 +12,7 @@ $(document).ready(function() {
 			console.log(data);
 
 			$("#modalHead").text("Notes for Article " + data._id);
+			$("#noteForm").attr("action", "/api/articles/"+articleId);
 		});
 
 	});
