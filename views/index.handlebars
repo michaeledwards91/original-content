@@ -1,12 +1,29 @@
+
+
 <div class="container">
+
 	<div class="row">
-		<a class="waves-effect waves-light btn-large" id="scraper" href="/scrape">Scrape!</a>
+
+		<div class="banner valign-wrapper">
+			<h1 class="center-align bannerText">Mongo Scraper</h1>
+		</div>
+		<a class="waves-effect waves-light btn center-align" id="scraper" href="/scrape">Scrape new articles from Google News<i class="material-icons">alarm</i></a>
+		  {{!-- <div class="carousel carousel-slider center" data-indicators="true">
+		    <div class="carousel-fixed-item center">
+		      <a class="btn waves-effect white grey-text darken-text-2">button</a>
+		    </div>
+		    <div class="carousel-item red white-text" href="#one!">
+		      <h2>First Panel</h2>
+		      <p class="white-text">This is your first panel</p>
+		    </div>
+		  </div> --}}
+		
 		<ul class="collection">
 		{{#each articles}}
 
 		    <li class="collection-item">
 		    <a href="{{this.link}}">{{this.title}}</a>
-		    <form action="/savearticle/{{this.id}}" method="POST">
+		    <form action="/savearticle/{{this.id}}" method="POST" class="saveForm">
 		    	<button type="submit" class="waves-effect waves-light btn saveBtn">Save Article</button>
 		    </form>
 		    </li>

@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
-	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+	//Materialize component initialization
     $('.modal').modal();
+    $('.carousel.carousel-slider').carousel({full_width: true});
 
     //Handle Article Notes button click
 	$(document).on("click", ".notesBtn", function() {

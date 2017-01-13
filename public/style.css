@@ -1,4 +1,8 @@
-.saveBtn {
+body {
+	font-size: 16px;
+	background-color: #F2E9E1;
+}
+.saveForm {
 	float: right;
 }
 .unsaveBtn {
@@ -9,4 +13,23 @@
 }
 .deleteNoteBtn {
 	float: right;
+}
+.banner {
+	min-height: 300px;
+}
+.nav-wrapper {
+	background-color: #1C140D;
+}
+.bannerText {
+	width: 100%;
+	font-family: 'Lobster', cursive;
+}
+.btn {
+	background-color: #1C140D;
+}
+#scraper {
+	height: 40px;
+}
+.collection .collection-item {
+	line-height: 2rem;
 }
