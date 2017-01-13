@@ -60,6 +60,11 @@ module.exports = function (app) {
 
 		  });
 
+		setTimeout( () => {
+    		console.log("timeout happened");
+    		res.redirect("/");
+    	}, 4000);
+    	
 		});
 
 	}); //End of scrape route
