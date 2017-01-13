@@ -3,6 +3,7 @@ $(document).ready(function() {
 	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
 
+    //Handle Article Notes button click
 	$(document).on("click", ".notesBtn", function() {
 
 		var articleId = $(this).attr("data-id");
@@ -27,6 +28,13 @@ $(document).ready(function() {
 			}
 		});
 
+	}); //End Article Notes button click
+
+	//Handle Save Article button click
+	$(document).on("click", ".saveBtn", function() {
+		//Toast to notify user that their article was successfully saved
+		Materialize.toast("Article saved.", 4000);
+		
 	});
 
 

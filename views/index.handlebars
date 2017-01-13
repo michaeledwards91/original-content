@@ -6,7 +6,9 @@
 
 		    <li class="collection-item">
 		    <a href="{{this.link}}">{{this.title}}</a>
-		    <a class="waves-effect waves-light btn saveBtn" href="/savearticle/{{this.id}}">Save Article</a>
+		    <form action="/savearticle/{{this.id}}" method="POST">
+		    	<button type="submit" class="waves-effect waves-light btn saveBtn">Save Article</button>
+		    </form>
 		    </li>
 
 		{{/each}}

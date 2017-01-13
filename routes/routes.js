@@ -178,7 +178,7 @@ module.exports = function (app) {
 	});
 
 	//Route to save articles
-	app.get("/savearticle/:id", function(req, res) {
+	app.post("/savearticle/:id", function(req, res) {
 		
 		var articleId = mongoose.Types.ObjectId(req.params.id);
 		console.log(articleId);
