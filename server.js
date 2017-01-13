@@ -30,7 +30,8 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set("view engine", "handlebars");
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/newsdb");
+var connectionUrl = process.env.MONGODB_URI || "mongodb://localhost/newsdb";
+mongoose.connect(connectionUrl);
 var db = mongoose.connection;
 
 // Show any mongoose errors
