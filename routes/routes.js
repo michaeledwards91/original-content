@@ -79,6 +79,13 @@ module.exports = function (app) {
 
 	});
 
+	app.get("/api/notes", function(req, res) {
+		Note.find({}, function(err, data) {
+			if (err) throw err;
+			res.json(data);
+		});
+	});
+
 	app.get("/api/articles/:id", function(req, res) {
 
 		var articleId = mongoose.Types.ObjectId(req.params.id);
@@ -87,6 +94,31 @@ module.exports = function (app) {
 		Article.findOne({_id: articleId}, function(err, doc) {
 			res.json(doc);
 		});	
+
+	});
+
+	app.get("/api/notes/:id", function(req, res) {
+
+		var noteId = mongoose.Types.ObjectId(req.params.id);
+		console.log(noteId);
+
+		Note.findOne({_id: noteId}, function(err, doc) {
+			res.json(doc);
+		});	
+
+	});
+
+	app.get("/api/removenote/:id", function(req, res) {
+
+		var noteId = mongoose.Types.ObjectId(req.params.id);
+		console.log(noteId);
+
+		Note.remove({_id: noteId}, function(err) {
+			if (err) throw err;
+			console.log("Note removed");
+			res.redirect("/saved");
+		});
+
 
 	});
 
@@ -119,7 +151,7 @@ module.exports = function (app) {
 
 			Article.findOneAndUpdate({_id: articleId}, { $push: {notes: doc._id} }, function(err, articleDoc) {
 				if (err) throw err;
-				res.send(articleDoc);
+				res.redirect("/saved");
 			});
 		});
 
