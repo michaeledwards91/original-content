@@ -7,6 +7,7 @@ body {
 }
 .unsaveBtn {
 	float: right;
+	margin-right:1%;
 }
 .notesBtn {
 	float: right;
