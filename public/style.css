@@ -31,5 +31,8 @@ body {
 	height: 40px;
 }
 .collection .collection-item {
-	line-height: 2rem;
+	line-height: 3rem;
+}
+nav .brand-logo {
+	margin-left: 1%;
 }
