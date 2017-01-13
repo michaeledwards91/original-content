@@ -12,9 +12,11 @@ module.exports = function (app) {
 
 	app.get("/", function(req, res) {
 
-		Article.find({}, function(err, data) {
+		Article.find({})
+		.sort({_id: 1})
+		.limit(30)
+		.exec(function(err, data) {
 			if (err) throw err;
-
 			res.render("index", {articles: data});
 		});
 		
@@ -51,13 +53,6 @@ module.exports = function (app) {
 		    result.link = $(element).children().attr("href");
 		    result.title = $(element).children().text();
 
-		    // var entry = new Article(result);
-
-		    // entry.save(function(err, doc) {
-		    // 	if (err) throw err;
-		    // 	console.log(doc);
-		    // });
-
 		    Article.findOneAndUpdate(result, result, {upsert: true}, function(err, doc) {
 		    	if (err) throw err;
 		    	console.log(doc);
@@ -89,7 +84,6 @@ module.exports = function (app) {
 	app.get("/api/articles/:id", function(req, res) {
 
 		var articleId = mongoose.Types.ObjectId(req.params.id);
-		console.log(articleId);
 
 		Article.findOne({_id: articleId}, function(err, doc) {
 			res.json(doc);
@@ -100,7 +94,6 @@ module.exports = function (app) {
 	app.get("/api/notes/:id", function(req, res) {
 
 		var noteId = mongoose.Types.ObjectId(req.params.id);
-		console.log(noteId);
 
 		Note.findOne({_id: noteId}, function(err, doc) {
 			res.json(doc);
@@ -111,7 +104,6 @@ module.exports = function (app) {
 	app.get("/api/removenote/:id", function(req, res) {
 
 		var noteId = mongoose.Types.ObjectId(req.params.id);
-		console.log(noteId);
 
 		Note.remove({_id: noteId}, function(err) {
 			if (err) throw err;
@@ -127,7 +119,6 @@ module.exports = function (app) {
 	app.get("/api/populatedarticle/:id", function(req, res) {
 
 		var articleId = mongoose.Types.ObjectId(req.params.id);
-		console.log(articleId);
 
 		Article.findOne({_id: articleId})
 		.populate("notes")
@@ -181,7 +172,6 @@ module.exports = function (app) {
 	app.post("/savearticle/:id", function(req, res) {
 		
 		var articleId = mongoose.Types.ObjectId(req.params.id);
-		console.log(articleId);
 
 		Article.findOneAndUpdate({_id: articleId}, { $set: {saved: true} }, function(err, doc) {
 
@@ -192,10 +182,10 @@ module.exports = function (app) {
 
 	});
 
+	//Route to unsave articles
 	app.get("/unsavearticle/:id", function(req, res) {
 
 		var articleId = mongoose.Types.ObjectId(req.params.id);
-		console.log(articleId);
 
 		Article.findOneAndUpdate({_id: articleId}, { $set: {saved: false} }, function(err, doc) {
 
